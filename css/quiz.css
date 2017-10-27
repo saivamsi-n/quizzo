@@ -1,0 +1,134 @@
+.navbar{
+      margin-bottom: 0;
+      background-color: #0173C5;
+      z-index: 9999;
+      border: 0;
+      font-size: 12px !important;
+      line-height: 1.42857143 !important;
+      letter-spacing: 3px;
+      border-radius: 0;
+      font-family: Montserrat, sans-serif;
+  }
+  .navbar li a, .navbar .navbar-brand {
+      color: #fff !important;
+  }
+
+  .navbar-nav li a:hover, .navbar-nav li.active a {
+      color: #0173C5 !important;
+      background-color: #fff !important;
+  }
+ 
+  .navbar-default .navbar-toggle {
+      border-color: transparent;
+      color: #fff !important;
+  }
+  /**/
+body {
+    background-color: #0173C5;
+    line-height:1;
+    color: white;
+     text-align: center;
+}
+
+.jumbotron {
+    background-color:#0173C5 !important;
+}
+
+/*end of default style resetting*/
+
+h1 {
+  font-size: 10vw;
+  font-family: 'Chonburi', cursive;
+  color: white;
+  padding-top: 10px;
+}
+
+.useranswer {
+  color:red;
+}
+.correctanswer{
+  color:green;
+}
+h3, #next, #previous {
+  text-align: center;
+  display: inline-block;
+  border-radius: 10%;
+}
+#previous, #next{
+    color: white;
+    background-color:#0173C5;
+    border-color:white;
+    border-style: solid;
+    margin: 0px 20px;
+}
+
+#submit-button{
+  color:#0173C5;
+  background-color:white;
+  border-color: #0173C5;
+  border-style: solid;
+  width:20%;
+}
+button#submit-button:hover {
+  color:white;
+  background-color: #0173C5;
+  border-color: white;
+  width:20%;
+}
+#result {
+  font-family: 'Press Start 2P', cursive !important;
+  font-weight: bold;
+  font-size: 2.5em;
+  color: #036;
+}
+
+input[name="option"] {
+  float:left;  
+}
+.btn-default:focus {
+    color: #333;
+    background-color: #e6e6e6;
+    border-color: #ccc;
+}
+#form div{
+  margin:auto;
+  max-width: 205px;
+}
+
+
+#container {
+  text-align: center;
+}
+
+input, select {
+    vertical-align:middle;
+}
+
+.button {
+    display: inline-block;
+    padding: 1em;
+    background-color: #79BD9A;
+    text-decoration: none !important; 
+    color: white !important;
+}
+
+body {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+   
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+textarea {
+  background-color: #0173C5;
+}
+
+
+.for-correctanswer {
+  color: red;
+}
+.for-useranswer {
+  color: blue;
+}
