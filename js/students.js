@@ -1,15 +1,17 @@
+//base Url
+var baseUrl = "https://quizzo-api.herokuapp.com/";
+
 var test = localStorage.getItem("user");
 var user = jQuery.parseJSON(test);
-console.log(user.username);
 $(document).ready(function(e) {
     $('a#name').html('<span class="glyphicon glyphicon-user"></span>  ' + user.username);
 
     $('a#logout').click(function() {
         window.location.href = "index.html";
+        localStorage.clear();
     });
 
     var filter_by;
-    console.log($('ul#drop li a').text());
     $('.search-panel .dropdown-menu').find('a').click(function(e) {
         e.preventDefault();
         var param = $(this).attr("href").replace("#", "");
@@ -74,7 +76,7 @@ $(document).ready(function(e) {
     function renderTable(offset, limit, filter, search) {
 
         $.ajax({
-            url: "http://127.0.0.1:8000/quizzo/students/list/", // the endpoint
+            url: baseUrl+"quizzo/students/", // the endpoint
             type: "POST", // http method
             'contentType': 'application/json',
             data: JSON.stringify({
@@ -105,10 +107,7 @@ $(document).ready(function(e) {
 
             // handle a non-successful response
             error: function(xhr, errmsg, err) {
-                $('#results').html("<div class='alert-box alert radius' data-alert>Oops! We have encountered an error: " + errmsg +
-                    " <a href='#' class='close'>&times;</a></div>"); // add the error to the dom
-                console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
-
+               alert("Couldnt fetch students list")
             }
         });
 
@@ -116,7 +115,16 @@ $(document).ready(function(e) {
     }
 
 });
+
+$(document).on('click', 'a.student-quiz-details', function() {
+    student_username = $(this).text();
+    console.log(student_username);
+    var test = localStorage.setItem("student-username", student_username);
+    window.location.href = "student.html";
+});
+
 $("a#name").click(function(event) {
+    console.log("working");
     var test = localStorage.getItem("user");
     user = jQuery.parseJSON(test);
     console.log(user.username);
@@ -127,7 +135,7 @@ $("a#name").click(function(event) {
     };
     console.log(data);
     $.ajax({
-        url: "http://127.0.0.1:8000/quizzo/profile/", // the endpoint
+        url: baseUrl+"quizzo/profile/", // the endpoint
         type: "POST", // http method
         'contentType': 'application/json',
         data: JSON.stringify(data), // data sent with the post request
@@ -137,24 +145,11 @@ $("a#name").click(function(event) {
 
             localStorage.setItem("user-profile-info", JSON.stringify(data));
             window.location.href = "profile.html";
-
         },
 
         // handle a non-successful response
         error: function(xhr, errmsg, err) {
-            $('#results').html("<div class='alert-box alert radius' data-alert>Oops! We have encountered an error: " + errmsg +
-                " <a href='#' class='close'>&times;</a></div>"); // add the error to the dom
-            console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
-            //alert("offset is invalid");
-            alert(xhr.responseText);
-        }
-
+          alert('Couldnt fetch user details');
+     }
     });
-});
-
-$(document).on('click', 'a.student-quiz-details', function() {
-    student_username = $(this).text();
-    console.log(student_username);
-    var test = localStorage.setItem("student-username", student_username);
-    window.location.href = "student.html";
 });

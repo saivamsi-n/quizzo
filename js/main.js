@@ -1,3 +1,7 @@
+//base Url
+var baseUrl = "https://quizzo-api.herokuapp.com/";
+
+
 $(document).ready(function() {
     // Add smooth scrolling to all links in navbar + footer link
     $(".navbar a, footer a[href='#myPage']").on('click', function(event) {
@@ -70,9 +74,8 @@ function modalPaddingSettings() {
 }
 
 function nextQuiz() {
-    console.log("create post is working!"); // sanity check
     $.ajax({
-        url: "http://127.0.0.1:8000/quizzo/next_quiz/", // the endpoint
+        url: baseUrl+"quizzo/quiz/next/", // the endpoint
         type: "GET", // http method
         crossDomain: true,
         // handle a successful response
@@ -82,17 +85,15 @@ function nextQuiz() {
 
         // handle a non-successful response
         error: function(xhr, errmsg, err) {
-            $('#results').html("<div class='alert-box alert radius' data-alert>Oops! We have encountered an error: " + errmsg +
-                " <a href='#' class='close'>&times;</a></div>"); // add the error to the dom
-            console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
+          alert("No Quiz Avaialable");
         }
     });
 }
 
 function getLeaderBoard() {
-    console.log("leaderboard is working!"); // sanity check
+   
     $.ajax({
-        url: "http://127.0.0.1:8000/quizzo/leaderboard/", // the endpoint
+        url: baseUrl+"quizzo/leaderboard/", // the endpoint
         type: "POST", // http method
         'contentType': 'application/json',
         data: JSON.stringify({
@@ -114,30 +115,24 @@ function getLeaderBoard() {
 
         // handle a non-successful response
         error: function(xhr, errmsg, err) {
-            $('#results').html("<div class='alert-box alert radius' data-alert>Oops! We have encountered an error: " + errmsg +
-                " <a href='#' class='close'>&times;</a></div>"); // add the error to the dom
-            console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
-
+          alert("Couldnt fetch leaderboard details");          
         }
     });
 }
 
 
 function studentSignupForm() {
-    console.log("into signupstudent");
     $("form#student-signup-form").submit(function(event) {
         list = $(this).serializeArray();
-        console.log(list);
         var values = {};
         $.each(list, function(i, field) {
             values[field.name] = field.value;
         });
-        console.log(values);
         event.preventDefault();
 
 
         $.ajax({
-            url: "http://127.0.0.1:8000/quizzo/student/signup/", // the endpoint
+            url: baseUrl+"quizzo/student/signup/", // the endpoint
             type: "POST", // http method
             'contentType': 'application/json',
             data: JSON.stringify(values), // data sent with the post request
@@ -153,10 +148,8 @@ function studentSignupForm() {
 
             // handle a non-successful response
             error: function(xhr, errmsg, err) {
-                $('#results').html("<div class='alert-box alert radius' data-alert>Oops! We have encountered an error: " + errmsg +
-                    " <a href='#' class='close'>&times;</a></div>"); // add the error to the dom
-                console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
-                //alert("offset is invalid");
+               
+                alert(xhr.responseText);
             }
         });
 
@@ -166,20 +159,17 @@ function studentSignupForm() {
 
 
 function teacherSignupForm() {
-    console.log("into signupteacher");
     $("form#teacher-signup-form").submit(function(event) {
         list = $(this).serializeArray();
-        console.log(list);
         var values = {};
         $.each(list, function(i, field) {
             values[field.name] = field.value;
         });
-        console.log(values);
         event.preventDefault();
 
 
         $.ajax({
-            url: "http://127.0.0.1:8000/quizzo/teacher/signup/", // the endpoint
+            url: baseUrl+"quizzo/teacher/signup/", // the endpoint
             type: "POST", // http method
             'contentType': 'application/json',
             data: JSON.stringify(values), // data sent with the post request
@@ -197,9 +187,8 @@ function teacherSignupForm() {
 
             // handle a non-successful response
             error: function(xhr, errmsg, err) {
-                $('#results').html("<div class='alert-box alert radius' data-alert>Oops! We have encountered an error: " + errmsg +
-                    " <a href='#' class='close'>&times;</a></div>"); // add the error to the dom
-                console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
+            
+                alert(xhr.responseText);
             }
         });
 
@@ -212,17 +201,17 @@ function teacherSignupForm() {
 function studentLoginForm() {
     $("form#student-login-form").submit(function(event) {
         list = $(this).serializeArray();
-        console.log(list);
+        
         var values = {};
         $.each(list, function(i, field) {
             values[field.name] = field.value;
         });
-        console.log(values);
+        
         event.preventDefault();
 
 
         $.ajax({
-            url: "http://127.0.0.1:8000/quizzo/student/login/", // the endpoint
+            url: baseUrl+"quizzo/student/login/", // the endpoint
             type: "POST", // http method
             'contentType': 'application/json',
             data: JSON.stringify(values), // data sent with the post request
@@ -234,16 +223,12 @@ function studentLoginForm() {
                 user.username = data.username;
                 user.user_type = data.user_type;
                 localStorage.setItem("user", JSON.stringify(user));
-                console.log(localStorage.getItem("user"));
                 window.location.href = "competition.html";
             },
 
             // handle a non-successful response
             error: function(xhr, errmsg, err) {
-                $('#results').html("<div class='alert-box alert radius' data-alert>Oops! We have encountered an error: " + errmsg +
-                    " <a href='#' class='close'>&times;</a></div>"); // add the error to the dom
-                console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
-                //alert("offset is invalid");
+              
                 alert(xhr.responseText);
             }
         });
@@ -264,7 +249,7 @@ function teacherLoginForm() {
 
 
         $.ajax({
-            url: "http://127.0.0.1:8000/quizzo/teacher/login/", // the endpoint
+            url: baseUrl+"quizzo/teacher/login/", // the endpoint
             type: "POST", // http method
             'contentType': 'application/json',
             data: JSON.stringify(values), // data sent with the post request
@@ -284,10 +269,7 @@ function teacherLoginForm() {
 
             // handle a non-successful response
             error: function(xhr, errmsg, err) {
-                $('#results').html("<div class='alert-box alert radius' data-alert>Oops! We have encountered an error: " + errmsg +
-                    " <a href='#' class='close'>&times;</a></div>"); // add the error to the dom
-                console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
-                //alert("offset is invalid");
+          
                 alert(xhr.responseText);
             }
         });

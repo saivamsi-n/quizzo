@@ -1,103 +1,105 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <!-- Theme Made By www.w3schools.com - No Copyright -->
   <title>QUIZOO</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-   <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/main.css">
   <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.js"></script>
   <script type="text/javascript" src="js/leaderboard.js"></script>
-  <style>
-  
-  </style>
+  <script type="text/javascript">
+    if(localStorage.getItem("user")==null){
+              window.location.href="index.html";
+          }
+  </script>
 </head>
+
 <body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
   <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-  <div class="container">
-     <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>                        
-      </button>
-      <a class="navbar-brand" href="#myPage">Quizzo</a>
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar"> <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button> <a class="navbar-brand" href="#myPage">Quizzo</a>
+      </div>
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="leaderboard.html">LEADERBOARD</a>
+          </li>
+          <li>
+            <a id="check"></a>
+          </li>
+        </ul>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="#" id="name"><span class="glyphicon glyphicon-user"></span></a>
+          </li>
+          <li><a href="#" id='logout'><span class="glyphicon glyphicon-log-out"></span> Logout</a>
+          </li>
+        </ul>
+      </div>
     </div>
-    <div class="collapse navbar-collapse" id="myNavbar">
-    <ul class="nav navbar-nav">
-     
-       <li class="active"><a href="leaderboard.html">LEADERBOARD</a></li>
-      <li><a id="check"></a></li>
-    </ul>
-    </ul>
-    <ul class="nav navbar-nav navbar-right">
-      <li><a href="#" id="name"><span class="glyphicon glyphicon-user"></span></a></li>
-      <li><a href="#" id='logout'><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
-    </ul>
-  </div>
-  </div>
-</nav>
-<br>
-<br>
-<br>
-<div class="container-fluid" id="leaderboard">
-  <div class="row">
-    <div class="col-sm-2"></div>
-    <div class="col-sm-8" id="check">
-     <div class="container-fluid">
-        <div class="row">    
-          <div class="col-xs-8 col-xs-offset-2" >
-          <div class="input-group">
+  </nav>
+  <br>
+  <br>
+  <br>
+  <div class="container-fluid" id="leaderboard">
+    <div class="row">
+      <div class="col-sm-2"></div>
+      <div class="col-sm-8" id="check">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-xs-8 col-xs-offset-2">
+              <div class="input-group">
                 <div class="input-group-btn search-panel">
-                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                      <span id="search_concept">Filter by</span> <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu" role="menu" id="drop">
-                      <li><a href="#contains">School</a></li>
-                      <li><a href="#its_equal">City</a></li>
-                      <li class="divider"></li>
-                      <li class="active"><a href="#all">All</a></li>
-                    </ul>
+                  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"> <span id="search_concept">Filter by</span>  <span class="caret"></span>
+                  </button>
+                  <ul class="dropdown-menu" role="menu" id="drop">
+                    <li><a href="#contains">School</a>
+                    </li>
+                    <li><a href="#its_equal">City</a>
+                    </li>
+                    <li class="divider"></li>
+                    <li class="active"><a href="#all">All</a>
+                    </li>
+                  </ul>
                 </div>
-                
-                <input type="hidden" name="search_param" value="all" id="search_param">         
-                <input type="text" class="form-control" id="search" name="search-field" placeholder="Search term...">
-                <span class="input-group-btn">
-                    <button class="btn btn-default" type="button" id="search-button"><span class="glyphicon glyphicon-search"></span></button>
+                <input type="hidden" name="search_param" value="all" id="search_param">
+                <input type="text" class="form-control" id="search" name="search-field" placeholder="Search term..."> <span class="input-group-btn">
+                    <button class="btn btn-default" type="button" id="search-button"><span class="glyphicon glyphicon-search"></span>
+                </button>
                 </span>
-              
+              </div>
             </div>
+          </div>
         </div>
-  </div>
-    
+        <table class="table" id="table-leaderboard">
+          <thead>
+            <tr>
+              <th data-field="username">Username</th>
+              <th data-field="points">Points</th>
+              <th data-field="school">School</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+        <ul class="pager">
+          <li class="previous"><a href="#" id="previous-button">Previous</a>
+          </li>
+          <li class="next"><a href="#" id="next-button">Next</a>
+          </li>
+        </ul>
+      </div>
+      <div class="col-sm-2"></div>
     </div>
-        <table class="table"  id="table-leaderboard">
-    <thead>
-      <tr>
-        <th data-field="username">Username</th>
-        <th data-field="points">Points</th>
-        <th data-field="school">School</th>
-      </tr>
-    </thead>
-    <tbody></tbody>
-  </table>
-    <ul class="pager">
-  <li class="previous"><a href="#" id="previous-button">Previous</a></li>
-  <li class="next"><a href="#" id="next-button">Next</a></li>
-</ul>  
-    </div>
-    <div class="col-sm-2"></div>
   </div>
-  
-  
-</div>
-<script type="text/javascript">
-  
-</script>
 </body>
+
 </html>

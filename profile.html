@@ -12,8 +12,15 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/profile.js"></script>
+     <script type="text/javascript">
+      if(localStorage.getItem("user")==null){
+          window.location.href="index.html";
+      }
+    </script>
     <style>
-
+      #edit-profile{
+        padding-left:80px;
+      }
     </style>
 </head>
 <body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
@@ -44,25 +51,24 @@
 <br>
 <br>
 
-<h1 style="padding-left: 80px;">Edit Profile</h1>
+<h1 id="edit-profile">Edit Profile</h1>
 <hr>
 <div class="row">
     <!-- left column -->
-    <div class="col-md-3">
+    <div class="col-md-2">
         <div class="text-center">
           
             <span class="glyphicon glyphicon-user logo-small">
-            <p style="font-size: 30px">Saivamsi</p>
 
         </div>
     </div>
 
     <!-- edit form column -->
-    <div class="col-md-9 personal-info">
+    <div class="col-md-10 personal-info">
         
         <h3>Personal info</h3>
 
-        <form class="form-horizontal" role="form" id="profile-form">
+        <form class="form-horizontal" role="form" id="profile-form" method="POST">
             <div class="form-group">
                 <label class="col-lg-3 control-label">First name:</label>
                 <div class="col-lg-8">
@@ -79,6 +85,12 @@
                 <label class="col-lg-3 control-label">School:</label>
                 <div class="col-lg-8">
                     <input class="form-control" type="text"  id="school" name="school">
+                </div>
+            </div>
+             <div class="form-group" id="standard">
+                <label class="col-lg-3 control-label">Standard:</label>
+                <div class="col-lg-8">
+                    <input class="form-control" type="text"  id="standard" name="standard">
                 </div>
             </div>
             <div class="form-group">
@@ -101,6 +113,27 @@
                     <input class="form-control" type="text" id="username" name="username">
                 </div>
             </div>
+            <div class="form-group">
+                    <label class="col-md-3 control-label">Password:</label>
+                    <div class="col-md-8">
+                        <input class="form-control" type="password" name="password">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-3 control-label">Confirm password:</label>
+                    <div class="col-md-8">
+                        <input class="form-control" type="password" name="password1">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-3 control-label"></label>
+                    <div class="col-md-8">
+                        <input type="submit" class="form-control" id="profile-submit-button" name="submit-button"
+                               value="Update Info">
+                        <span></span>
+
+                    </div>
+                </div>
             
         </form>
     </div>

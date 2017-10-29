@@ -1,18 +1,19 @@
+//base Url
+var baseUrl = "https://quizzo-api.herokuapp.com/";
+
 function studentSignupForm() {
-    console.log("into signupstudent");
     $("form#student-signup-form").submit(function(event) {
         list = $(this).serializeArray();
-        console.log(list);
         var values = {};
         $.each(list, function(i, field) {
             values[field.name] = field.value;
         });
-        console.log(values);
         event.preventDefault();
 
+        checkPasswordsMatch(values);
 
         $.ajax({
-            url: "http://127.0.0.1:8000/quizzo/student/signup/", // the endpoint
+            url: baseUrl+"quizzo/student/signup/", // the endpoint
             type: "POST", // http method
             'contentType': 'application/json',
             data: JSON.stringify(values), // data sent with the post request
@@ -24,17 +25,13 @@ function studentSignupForm() {
                 user.username = data.username;
                 localStorage.setItem("user", JSON.stringify(user));
 
-                console.log(localStorage.getItem('user'));
-
                 window.location.href = "competition.html";
             },
 
             // handle a non-successful response
             error: function(xhr, errmsg, err) {
-                $('#results').html("<div class='alert-box alert radius' data-alert>Oops! We have encountered an error: " + errmsg +
-                    " <a href='#' class='close'>&times;</a></div>"); // add the error to the dom
-                console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
-                //alert("offset is invalid");
+               
+                alert(xhr.responseText);
             }
         });
 
@@ -44,20 +41,17 @@ function studentSignupForm() {
 
 
 function teacherSignupForm() {
-    console.log("into signupteacher");
     $("form#teacher-signup-form").submit(function(event) {
         list = $(this).serializeArray();
-        console.log(list);
         var values = {};
         $.each(list, function(i, field) {
             values[field.name] = field.value;
         });
-        console.log(values);
         event.preventDefault();
-
+        checkPasswordsMatch(values);
 
         $.ajax({
-            url: "http://127.0.0.1:8000/quizzo/teacher/signup/", // the endpoint
+            url: baseUrl+"quizzo/teacher/signup/", // the endpoint
             type: "POST", // http method
             'contentType': 'application/json',
             data: JSON.stringify(values), // data sent with the post request
@@ -65,7 +59,6 @@ function teacherSignupForm() {
             // handle a successful response
             success: function(data) {
 
-                console.log("student success");
                 var user = {};
                 user.id = data.id;
                 user.username = data.username;
@@ -77,105 +70,8 @@ function teacherSignupForm() {
 
             // handle a non-successful response
             error: function(xhr, errmsg, err) {
-                $('#results').html("<div class='alert-box alert radius' data-alert>Oops! We have encountered an error: " + errmsg +
-                    " <a href='#' class='close'>&times;</a></div>"); // add the error to the dom
-                console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
-                //alert("offset is invalid");
-            }
-        });
-
-    });
-
-}
-
-
-function studentSignupForm() {
-    console.log("into signupstudent");
-    $("form#student-signup-form").submit(function(event) {
-        list = $(this).serializeArray();
-        console.log(list);
-        var values = {};
-        $.each(list, function(i, field) {
-            values[field.name] = field.value;
-        });
-        console.log(values);
-        event.preventDefault();
-
-
-        $.ajax({
-            url: "http://127.0.0.1:8000/quizzo/student/signup/", // the endpoint
-            type: "POST", // http method
-            'contentType': 'application/json',
-            data: JSON.stringify(values), // data sent with the post request
-            crossDomain: true,
-            // handle a successful response
-            success: function(data) {
-                //$('#post-text').val(''); // remove the value from the input
-                // console.log(json); // log the returned json to the console
-                console.log("student success");
-                var user = {};
-                user.id = data.id;
-                user.username = data.username;
-                user.user_type = "student";
-                localStorage.setItem("user", JSON.stringify(user));
-
-                console.log(localStorage.getItem('user'));
-
-                window.location.href = "competition.html";
-            },
-
-            // handle a non-successful response
-            error: function(xhr, errmsg, err) {
-                $('#results').html("<div class='alert-box alert radius' data-alert>Oops! We have encountered an error: " + errmsg +
-                    " <a href='#' class='close'>&times;</a></div>"); // add the error to the dom
-                console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
-                //alert("offset is invalid");
-            }
-        });
-
-    });
-
-}
-
-
-function teacherSignupForm() {
-    console.log("into signupteacher");
-    $("form#teacher-signup-form").submit(function(event) {
-        list = $(this).serializeArray();
-        console.log(list);
-        var values = {};
-        $.each(list, function(i, field) {
-            values[field.name] = field.value;
-        });
-        console.log(values);
-        event.preventDefault();
-
-
-        $.ajax({
-            url: "http://127.0.0.1:8000/quizzo/teacher/signup/", // the endpoint
-            type: "POST", // http method
-            'contentType': 'application/json',
-            data: JSON.stringify(values), // data sent with the post request
-            crossDomain: true,
-            // handle a successful response
-            success: function(data) {
-
-                console.log("student success");
-                var user = {};
-                user.id = data.id;
-                user.username = data.username;
-                user.user_type = "teacher";
-                localStorage.setItem("user", JSON.stringify(user));
-
-                window.location.href = "leaderboard.html";
-            },
-
-            // handle a non-successful response
-            error: function(xhr, errmsg, err) {
-                $('#results').html("<div class='alert-box alert radius' data-alert>Oops! We have encountered an error: " + errmsg +
-                    " <a href='#' class='close'>&times;</a></div>"); // add the error to the dom
-                console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
-                //alert("offset is invalid");
+               
+                alert(xhr.responseText);
             }
         });
 
@@ -195,10 +91,10 @@ function studentLoginForm() {
         });
         console.log(values);
         event.preventDefault();
-
+        checkPasswordsMatch(values);
 
         $.ajax({
-            url: "http://127.0.0.1:8000/quizzo/student/login/", // the endpoint
+            url: baseUrl+"quizzo/student/login/", // the endpoint
             type: "POST", // http method
             'contentType': 'application/json',
             data: JSON.stringify(values), // data sent with the post request
@@ -210,16 +106,12 @@ function studentLoginForm() {
                 user.username = data.username;
                 user.user_type = "student";
                 localStorage.setItem("user", JSON.stringify(user));
-                console.log(localStorage.getItem("user"));
                 window.location.href = "competition.html";
             },
 
             // handle a non-successful response
             error: function(xhr, errmsg, err) {
-                $('#results').html("<div class='alert-box alert radius' data-alert>Oops! We have encountered an error: " + errmsg +
-                    " <a href='#' class='close'>&times;</a></div>"); // add the error to the dom
-                console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
-                //alert("offset is invalid");
+               
                 alert(xhr.responseText);
             }
         });
@@ -230,17 +122,15 @@ function studentLoginForm() {
 function teacherLoginForm() {
     $("form#teacher-login-form").submit(function(event) {
         list = $(this).serializeArray();
-        console.log(list);
         var values = {};
         $.each(list, function(i, field) {
             values[field.name] = field.value;
         });
-        console.log(values);
         event.preventDefault();
-
+        checkPasswordsMatch(values);
 
         $.ajax({
-            url: "http://127.0.0.1:8000/quizzo/teacher/login/", // the endpoint
+            url: baseUrl+"quizzo/teacher/login/", // the endpoint
             type: "POST", // http method
             'contentType': 'application/json',
             data: JSON.stringify(values), // data sent with the post request
@@ -252,18 +142,13 @@ function teacherLoginForm() {
                 user.username = data.username;
                 user.user_type = "teacher";
                 localStorage.setItem("user", JSON.stringify(user));
-
-                console.log(localStorage.getItem('user'));
                 window.location.href = "leaderboard.html";
 
             },
 
             // handle a non-successful response
             error: function(xhr, errmsg, err) {
-                $('#results').html("<div class='alert-box alert radius' data-alert>Oops! We have encountered an error: " + errmsg +
-                    " <a href='#' class='close'>&times;</a></div>"); // add the error to the dom
-                console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
-                //alert("offset is invalid");
+                
                 alert(xhr.responseText);
             }
         });
@@ -271,6 +156,13 @@ function teacherLoginForm() {
 
 
     });
+}
+
+function checkPasswordsMatch(values){
+     if(values['password']!=values['password1']){
+          alert("passswords doesnot match");
+          return;
+        }
 }
 
 $(document).ready(function() {

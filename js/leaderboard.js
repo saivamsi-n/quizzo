@@ -1,11 +1,15 @@
+//base Url
+var baseUrl = "https://quizzo-api.herokuapp.com/";
+
 var test = localStorage.getItem("user");
 var user = jQuery.parseJSON(test);
-console.log(user.username);
+console.log(user.user_type);
 $(document).ready(function(e) {
 
     $('a#name').html('<span class="glyphicon glyphicon-user"></span>  ' + user.username);
     $('a#logout').click(function() {
         window.location.href = "index.html";
+         localStorage.clear();
     });
 
 
@@ -77,8 +81,8 @@ $(document).ready(function(e) {
     function renderTable(offset, limit, filter, search) {
 
         $.ajax({
-            url: "http://127.0.0.1:8000/quizzo/leaderboard/", // the endpoint
-            type: "POST", // http method
+            url: baseUrl+"quizzo/leaderboard/",
+            type: "POST",
             'contentType': 'application/json',
             data: JSON.stringify({
                 "offset": offset,
@@ -89,8 +93,6 @@ $(document).ready(function(e) {
             crossDomain: true,
             // handle a successful response
             success: function(data) {
-                //$('#post-text').val(''); // remove the value from the input
-                //
                 total = data.total;
                 var table = $('table#table-leaderboard tbody');
                 table.html('');
@@ -109,10 +111,7 @@ $(document).ready(function(e) {
 
             // handle a non-successful response
             error: function(xhr, errmsg, err) {
-                $('#results').html("<div class='alert-box alert radius' data-alert>Oops! We have encountered an error: " + errmsg +
-                    " <a href='#' class='close'>&times;</a></div>"); // add the error to the dom
-                console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
-
+               alert("Couldnt fetch leaderboard details");
             }
         });
 
@@ -130,7 +129,7 @@ $(document).ready(function(e) {
         };
         console.log(data);
         $.ajax({
-            url: "http://127.0.0.1:8000/quizzo/profile/", // the endpoint
+            url: baseUrl+"quizzo/profile/", // the endpoint
             type: "POST", // http method
             'contentType': 'application/json',
             data: JSON.stringify(data), // data sent with the post request
@@ -144,11 +143,7 @@ $(document).ready(function(e) {
 
             // handle a non-successful response
             error: function(xhr, errmsg, err) {
-                $('#results').html("<div class='alert-box alert radius' data-alert>Oops! We have encountered an error: " + errmsg +
-                    " <a href='#' class='close'>&times;</a></div>"); // add the error to the dom
-                console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
-                //alert("offset is invalid");
-                alert(xhr.responseText);
+                alert("Couldnt fetch User ProfileDetails");
             }
 
         });

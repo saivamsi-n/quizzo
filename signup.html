@@ -13,8 +13,16 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/signup.js"></script>
     <style>
-
+      #edit-signup{
+        padding-left:80px;
+      }
     </style>
+     <script type="text/javascript">
+      if(localStorage.getItem("user")==null){
+          window.location.href="index.html";
+      }
+    </script>
+   
 </head>
 <body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
 <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -99,7 +107,7 @@
 <br>
 <br>
 <br>
-<h1 class="text-center" style="padding-left: 80px;">Signup</h1>
+<h1 class="text-center" id="edit-signup">Signup</h1>
 <hr>
 <div class="container" id="singup">
     <ul class="nav nav-tabs nav-justified">
@@ -275,10 +283,6 @@
 
 
 </div>
-<hr>
-<script type="text/javascript">
 
-
-</script>
 </body>
 </html>

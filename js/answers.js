@@ -1,4 +1,6 @@
-//User information
+//base Url
+var baseUrl = "https://quizzo-api.herokuapp.com/";
+
 var test = localStorage.getItem("user");
 var user = jQuery.parseJSON(test);
 $('a#name').html('<span class="glyphicon glyphicon-user"></span>  ' + user.username);
@@ -7,12 +9,12 @@ $('h4#description').html(test.description);
 
 
 $('a#logout').click(function() {
-    window.location.href = "index.html"
+    window.location.href = "index.html";
+     localStorage.clear();
 });
 
 
 function startQuizTest(data) {
-    console.log(data.questions_list);
     temp = data.questions_list;
 
     function QuizQuestion(question, choices, question_id, question_type, user_answer, user_answer_id, correct_answer, correct_answer_id) {
@@ -123,7 +125,7 @@ function getQuizReference() {
     // var quiz = jQuery.parseJSON(test);
     var student_username = localStorage.getItem("student-username");
     $.ajax({
-        url: "http://127.0.0.1:8000/quizzo/student/" + student_username + "/quiz/reference/", // the endpoint
+        url: baseUrl+"quizzo/student/" + student_username + "/quiz/reference/", // the endpoint
         type: "POST", // http method
         'contentType': 'application/json',
         data: JSON.stringify({
@@ -135,8 +137,6 @@ function getQuizReference() {
 
         // handle a non-successful response
         error: function(xhr, errmsg, err) {
-            $('#results').html("<div class='alert-box alert radius' data-alert>Oops! We have encountered an error: " + errmsg +
-                " <a href='#' class='close'>&times;</a></div>"); // add the error to the dom
             console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
         }
 
