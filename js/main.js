@@ -85,7 +85,7 @@ function nextQuiz() {
 
         // handle a non-successful response
         error: function(xhr, errmsg, err) {
-          alert("No Quiz Avaialable");
+          console.log("No Quiz Avaialable");
         }
     });
 }
@@ -115,7 +115,7 @@ function getLeaderBoard() {
 
         // handle a non-successful response
         error: function(xhr, errmsg, err) {
-          alert("Couldnt fetch leaderboard details");          
+          console.log("Couldnt fetch leaderboard details");          
         }
     });
 }
