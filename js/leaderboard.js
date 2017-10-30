@@ -3,7 +3,6 @@ var baseUrl = "https://quizzo-api.herokuapp.com/";
 
 var test = localStorage.getItem("user");
 var user = jQuery.parseJSON(test);
-console.log(user.user_type);
 $(document).ready(function(e) {
 
     $('a#name').html('<span class="glyphicon glyphicon-user"></span>  ' + user.username);
@@ -111,7 +110,7 @@ $(document).ready(function(e) {
 
             // handle a non-successful response
             error: function(xhr, errmsg, err) {
-               alert("Couldnt fetch leaderboard details");
+               console.log("Couldnt fetch leaderboard details");
             }
         });
 
