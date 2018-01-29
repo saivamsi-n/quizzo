@@ -21,10 +21,10 @@ var baseUrl = "https://quizzo-api.herokuapp.com/";
      $('input#city').val(user.city);
       
      if(user.user_type=="student"){
-      $('input#standard').val(user.standard);
+      $('input#year').val(user.year);
      }
      else{
-      $('div#standard').hide();
+      $('div#year').hide();
      }
      
       studentProfileForm(user.username);

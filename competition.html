@@ -172,6 +172,7 @@ var baseUrl = "https://quizzo-api.herokuapp.com/";
             var quiz = jQuery.parseJSON(test);
             var test = localStorage.getItem("user");
             var user = jQuery.parseJSON(test);
+            console.log(quiz);
             $.ajax({
                 url: baseUrl+"quizzo/student/" + user.username + "/quiz/" + quiz.quiz_id + "/check/", // the endpoint
                 type: "GET", // http method

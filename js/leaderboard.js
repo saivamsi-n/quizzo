@@ -101,7 +101,7 @@ $(document).ready(function(e) {
                         var forhtml = '<tr>';
                         forhtml += "<td>" + students[obj].username + "</td>";
                         forhtml += "<td>" + students[obj].points + "</td>";
-                        forhtml += "<td>" + students[obj].school + "</td>";
+                        forhtml += "<td>" + students[obj].college + "</td>";
                         forhtml += '</tr>';
                         table.append(forhtml);
                     }

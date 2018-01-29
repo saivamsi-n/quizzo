@@ -168,7 +168,7 @@ function startQuizTest(data){
       $('#start').click(function() {
 
          //setupOptions();
-         checkUserAttempt(); 
+         //checkUserAttempt(); 
       });
 
     });     

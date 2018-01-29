@@ -97,7 +97,7 @@ $(document).ready(function(e) {
                     for (obj in students) {
                         var forhtml = '<tr>';
                         forhtml += "<td><a href='#' class='student-quiz-details'>" + students[obj].username + "</a></td>";
-                        forhtml += "<td>" + students[obj].standard + "</td>";
+                        forhtml += "<td>" + students[obj].year + "</td>";
                         forhtml += '</tr>';
                         table.append(forhtml);
                     }
